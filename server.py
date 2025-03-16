@@ -52,11 +52,12 @@ def increase_score():
         if team["id"] == team_id:
             team["score"] += 1
 
+    # Sort the scoreboard on the server side as well (optional but safer)
+    scoreboard.sort(key=lambda x: x["score"], reverse=True)
+
     print("Updated scoreboard:", scoreboard)  # Debugging log
 
     return jsonify(scoreboard=scoreboard)
-
-
 
 if __name__ == '__main__':
    app.run(debug = True)
