@@ -23,25 +23,31 @@ function addTeamView(id, name, score){
   $("#teams").append(team_template);
 }
 
-function increase_score(id){
-  var team_id = {"id": id}
+
+
+
+function increase_score(id) {
+  var team_id = { "id": id };
+  
   $.ajax({
     type: "POST",
-    url: "increase_score",                
-    dataType : "json",
+    url: "increase_score",
+    dataType: "json",
     contentType: "application/json; charset=utf-8",
-    data : JSON.stringify(team_id),
+    data: JSON.stringify(team_id),
     success: function(result){
-        
-    },
-    error: function(request, status, error){
-        console.log("Error");
-        console.log(request)
-        console.log(status)
-        console.log(error)
+    console.log("Updated Scoreboard:", result.scoreboard);
+    display_scoreboard(result.scoreboard);
+},
+    error: function(request, status, error) {
+      console.log("Error");
+      console.log(request);
+      console.log(status);
+      console.log(error);
     }
   });
 }
+
 
 $(document).ready(function(){
   display_scoreboard(scoreboard);
